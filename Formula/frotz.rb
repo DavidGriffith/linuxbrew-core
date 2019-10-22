@@ -1,9 +1,9 @@
 class Frotz < Formula
   desc "Infocom-style interactive fiction player"
-  homepage "https://github.com/DavidGriffith/frotz"
-  url "https://github.com/DavidGriffith/frotz/archive/2.44.tar.gz"
-  sha256 "dbb5eb3bc95275dcb984c4bdbaea58bc1f1b085b20092ce6e86d9f0bf3ba858f"
-  head "https://github.com/DavidGriffith/frotz.git"
+  homepage "https://gitlab.com/DavidGriffith/frotz"
+  url "https://gitlab.com/DavidGriffith/frotz/-/archive/2.50b2/frotz-2.50b2.tar.gz"
+  sha256 "228046edeca45867af312ebffd2e6a83ed8df69dd161fbaf4ea818f789328cba"
+  head "https://gitlab.com/DavidGriffith/frotz.git"
 
   bottle do
     sha256 "a47f879a4475b7ca3b35e481ae220a672023178536a8453b0a27cc34a705919b" => :catalina
@@ -16,13 +16,13 @@ class Frotz < Formula
 
   def install
     inreplace "Makefile" do |s|
-      s.remove_make_var! %w[CC OPTS]
+      s.remove_make_var! "CC"
       s.change_make_var! "PREFIX", prefix
-      s.change_make_var! "CONFIG_DIR", etc
-      s.change_make_var! "MAN_PREFIX", share
+      s.change_make_var! "SYSCONFDIR", etc
+      s.change_make_var! "MANDIR", share
     end
 
-    system "make", "frotz"
+    system "make", "nosound"
     system "make", "install"
   end
 end
